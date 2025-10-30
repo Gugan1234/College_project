@@ -1,0 +1,43 @@
+body {
+  font-family: 'Poppins', sans-serif;
+  background: #f0f4f8;
+}
+
+.project-card {
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  color: white;
+  border-radius: 15px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.project-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+}
+
+.badge {
+  font-size: 0.85rem;
+  padding: 0.5em 0.7em;
+}
+
+.form-card {
+  width: 450px;
+  background: linear-gradient(135deg, #89f7fe, #66a6ff);
+  border-radius: 15px;
+  padding: 30px;
+  color: #fff;
+}
+
+.btn-gradient {
+  background: linear-gradient(90deg, #667eea, #764ba2);
+  color: white;
+  border: none;
+}
+
+.btn-gradient:hover {
+  opacity: 0.9;
+  color: white;
+}
+
+.card-title {
+  font-weight: 600;
+}

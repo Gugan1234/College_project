@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Food Delivery - Restaurant</title>
+    <style>
+        body {
+            background: #fffde7;
+            font-family: 'Segoe UI', Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 700px;
+            margin: 40px auto;
+            background: #fff;
+            border-radius: 12px;
+            box-shadow: 0 8px 24px rgba(255, 193, 7, 0.13);
+            padding: 32px 24px;
+        }
+        h1 {
+            color: #ff9800;
+            margin-bottom: 24px;
+            text-align: center;
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+            margin-bottom: 32px;
+        }
+        input, textarea {
+            margin-bottom: 12px;
+            padding: 10px;
+            border-radius: 8px;
+            border: 1px solid #ffe0b2;
+            font-size: 1rem;
+        }
+        button {
+            background: linear-gradient(90deg, #ff9800 0%, #ffc107 100%);
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            padding: 10px 18px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        button:hover {
+            background: linear-gradient(90deg, #ffc107 0%, #ff9800 100%);
+        }
+        .food {
+            background: #fff8e1;
+            border-radius: 8px;
+            padding: 14px 18px;
+            margin-bottom: 18px;
+            box-shadow: 0 2px 6px rgba(255, 193, 7, 0.07);
+            position: relative;
+        }
+        .food-name {
+            color: #ff9800;
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+        .food-desc {
+            color: #757575;
+            margin-bottom: 8px;
+        }
+        .food-price {
+            color: #388e3c;
+            font-weight: bold;
+            font-size: 1.1rem;
+        }
+        .delete-btn {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            background: #e53935;
+            color: #fff;
+            border: none;
+            border-radius: 6px;
+            padding: 6px 12px;
+            font-size: 0.95rem;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        .delete-btn:hover {
+            background: #b71c1c;
+        }
+        .food-img {
+            max-width: 100%;
+            border-radius: 8px;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Food Delivery - Restaurant</h1>
+        <form action="/add" method="post" enctype="multipart/form-data">
+            <input type="text" name="name" placeholder="Food name" required>
+            <textarea name="description" rows="2" placeholder="Description" required></textarea>
+            <input type="number" name="price" placeholder="Price" required min="1" step="any">
+            <input type="file" name="image" accept="image/*" style="margin-bottom:12px;">
+            <button type="submit">Add Food Item</button>
+        </form>
+        <% if (orderSuccess) { %>
+            <div style="background:#c8e6c9;color:#388e3c;padding:12px;border-radius:8px;margin-bottom:18px;text-align:center;font-weight:600;">Order placed successfully!</div>
+        <% } %>
+        <% foods.forEach(food => { %>
+            <div class="food">
+                <form action="/delete/<%= food._id %>" method="post" style="display:inline;">
+                    <button type="submit" class="delete-btn">Delete</button>
+                </form>
+                <form action="/order/<%= food._id %>" method="get" style="display:inline;">
+                    <button type="submit" style="background:#43ea7c;color:#fff;border:none;border-radius:6px;padding:6px 12px;font-size:0.95rem;cursor:pointer;transition:background 0.2s;margin-left:8px;">Order</button>
+                </form>
+                <% if (food.image) { %>
+                    <img src="<%= food.image %>" alt="Food Image" class="food-img">
+                <% } %>
+                <div class="food-name"><%= food.name %></div>
+                <div class="food-desc"><%= food.description %></div>
+                <div class="food-price">₹ <%= food.price %></div>
+            </div>
+        <% }) %>
+    </div>
+</body>
+</html>

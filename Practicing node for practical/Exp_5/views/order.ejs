@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order Food</title>
+    <style>
+        body {
+            background: #fffde7;
+            font-family: 'Segoe UI', Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 500px;
+            margin: 40px auto;
+            background: #fff;
+            border-radius: 12px;
+            box-shadow: 0 8px 24px rgba(255, 193, 7, 0.13);
+            padding: 32px 24px;
+        }
+        h2 {
+            color: #ff9800;
+            margin-bottom: 24px;
+            text-align: center;
+        }
+        .food-img {
+            max-width: 100%;
+            border-radius: 8px;
+            margin-bottom: 10px;
+        }
+        .food-name {
+            color: #ff9800;
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+        .food-desc {
+            color: #757575;
+            margin-bottom: 8px;
+        }
+        .food-price {
+            color: #388e3c;
+            font-weight: bold;
+            font-size: 1.1rem;
+            margin-bottom: 18px;
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+        input, textarea {
+            margin-bottom: 12px;
+            padding: 10px;
+            border-radius: 8px;
+            border: 1px solid #ffe0b2;
+            font-size: 1rem;
+        }
+        button {
+            background: linear-gradient(90deg, #ff9800 0%, #ffc107 100%);
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            padding: 10px 18px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        button:hover {
+            background: linear-gradient(90deg, #ffc107 0%, #ff9800 100%);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Order Food</h2>
+        <% if (food.image) { %>
+            <img src="<%= food.image %>" alt="Food Image" class="food-img">
+        <% } %>
+        <div class="food-name"><%= food.name %></div>
+        <div class="food-desc"><%= food.description %></div>
+        <div class="food-price">₹ <%= food.price %></div>
+        <form action="/order/<%= food._id %>" method="post">
+            <input type="text" name="customerName" placeholder="Your Name" required>
+            <textarea name="address" rows="2" placeholder="Delivery Address" required></textarea>
+            <input type="number" name="quantity" placeholder="Quantity" required min="1" value="1">
+            <button type="submit">Place Order</button>
+        </form>
+    </div>
+</body>
+</html>

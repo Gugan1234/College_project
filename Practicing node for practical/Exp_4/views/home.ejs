@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Microblog Home</title>
+    <style>
+        body {
+            background: #e8f5e9;
+            font-family: 'Segoe UI', Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 600px;
+            margin: 40px auto;
+            background: #fff;
+            border-radius: 12px;
+            box-shadow: 0 8px 24px rgba(56, 142, 60, 0.13);
+            padding: 32px 24px;
+        }
+        h1 {
+            color: #388e3c;
+            margin-bottom: 24px;
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+            margin-bottom: 32px;
+        }
+        input, textarea {
+            margin-bottom: 12px;
+            padding: 10px;
+            border-radius: 8px;
+            border: 1px solid #a5d6a7;
+            font-size: 1rem;
+        }
+        button {
+            background: linear-gradient(90deg, #43ea7c 0%, #388e3c 100%);
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            padding: 10px 18px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        button:hover {
+            background: linear-gradient(90deg, #388e3c 0%, #43ea7c 100%);
+        }
+        .post {
+            background: #c8e6c9;
+            border-radius: 8px;
+            padding: 14px 18px;
+            margin-bottom: 18px;
+            box-shadow: 0 2px 6px rgba(56, 142, 60, 0.07);
+            position: relative;
+        }
+        .author {
+            color: #2e7d32;
+            font-weight: bold;
+        }
+        .timestamp {
+            color: #636e72;
+            font-size: 0.9rem;
+        }
+        .delete-btn {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            background: #e53935;
+            color: #fff;
+            border: none;
+            border-radius: 6px;
+            padding: 6px 12px;
+            font-size: 0.95rem;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        .delete-btn:hover {
+            background: #b71c1c;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Microblog</h1>
+        <form action="/add" method="post">
+            <input type="text" name="author" placeholder="Your name" required>
+            <textarea name="content" rows="3" placeholder="What's on your mind?" required></textarea>
+            <button type="submit">Post</button>
+        </form>
+        <% posts.forEach(post => { %>
+            <div class="post">
+                <form action="/delete/<%= post._id %>" method="post" style="display:inline;">
+                    <button type="submit" class="delete-btn">Delete</button>
+                </form>
+                <div class="author"><%= post.author %></div>
+                <div class="timestamp"><%= post.createdAt.toLocaleString() %></div>
+                <div class="content"><%= post.content %></div>
+            </div>
+        <% }) %>
+    </div>
+</body>
+</html>
